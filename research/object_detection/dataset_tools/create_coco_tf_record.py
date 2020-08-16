@@ -53,14 +53,14 @@ flags = tf.app.flags
 tf.flags.DEFINE_boolean(
     'include_masks', False, 'Whether to include instance segmentations masks '
     '(PNG encoded) in the result. default: False.')
-tf.flags.DEFINE_string('train_image_dir', '', 'Training image directory.')
-tf.flags.DEFINE_string('val_image_dir', '', 'Validation image directory.')
-tf.flags.DEFINE_string('test_image_dir', '', 'Test image directory.')
-tf.flags.DEFINE_string('train_annotations_file', '',
+tf.flags.DEFINE_string('train_image_dir', '/home/zhangwei/PycharmProjects/DL/YoloV3_tf2/data/coco/train2017/', 'Training image directory.')
+tf.flags.DEFINE_string('val_image_dir', '/home/zhangwei/PycharmProjects/DL/YoloV3_tf2/data/coco/val2017/', 'Validation image directory.')
+tf.flags.DEFINE_string('test_image_dir', '/home/zhangwei/PycharmProjects/DL/YoloV3_tf2/data/coco/test2017/', 'Test image directory.')
+tf.flags.DEFINE_string('train_annotations_file', '/home/zhangwei/PycharmProjects/DL/YoloV3_tf2/data/coco/annotations/instances_train2017.json',
                        'Training annotations JSON file.')
-tf.flags.DEFINE_string('val_annotations_file', '',
+tf.flags.DEFINE_string('val_annotations_file', '/home/zhangwei/PycharmProjects/DL/YoloV3_tf2/data/coco/annotations/instances_val2017.json',
                        'Validation annotations JSON file.')
-tf.flags.DEFINE_string('testdev_annotations_file', '',
+tf.flags.DEFINE_string('testdev_annotations_file', '/home/zhangwei/PycharmProjects/DL/YoloV3_tf2/data/coco/annotations/instances_val2017.json',
                        'Test-dev annotations JSON file.')
 tf.flags.DEFINE_string('train_keypoint_annotations_file', '',
                        'Training annotations JSON file.')
@@ -71,7 +71,7 @@ tf.flags.DEFINE_string('train_densepose_annotations_file', '',
                        'Training annotations JSON file for DensePose.')
 tf.flags.DEFINE_string('val_densepose_annotations_file', '',
                        'Validation annotations JSON file for DensePose.')
-tf.flags.DEFINE_string('output_dir', '/tmp/', 'Output data directory.')
+tf.flags.DEFINE_string('output_dir', '/home/zhangwei/PycharmProjects/DL/YoloV3_tf2/data/coco/coco_tfrecord', 'Output data directory.')
 # Whether to only produce images/annotations on person class (for keypoint /
 # densepose task).
 tf.flags.DEFINE_boolean('remove_non_person_annotations', False, 'Whether to '
@@ -491,7 +491,7 @@ def main(_):
       FLAGS.train_image_dir,
       train_output_path,
       FLAGS.include_masks,
-      num_shards=100,
+      num_shards=1,
       keypoint_annotations_file=FLAGS.train_keypoint_annotations_file,
       densepose_annotations_file=FLAGS.train_densepose_annotations_file,
       remove_non_person_annotations=FLAGS.remove_non_person_annotations,
@@ -501,7 +501,7 @@ def main(_):
       FLAGS.val_image_dir,
       val_output_path,
       FLAGS.include_masks,
-      num_shards=50,
+      num_shards=1,
       keypoint_annotations_file=FLAGS.val_keypoint_annotations_file,
       densepose_annotations_file=FLAGS.val_densepose_annotations_file,
       remove_non_person_annotations=FLAGS.remove_non_person_annotations,
@@ -511,7 +511,7 @@ def main(_):
       FLAGS.test_image_dir,
       testdev_output_path,
       FLAGS.include_masks,
-      num_shards=50)
+      num_shards=1)
 
 
 if __name__ == '__main__':
